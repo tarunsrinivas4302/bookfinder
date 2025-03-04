@@ -1,4 +1,5 @@
 import BookCard from '@/components/book-card';
+import PaginationComponent from '@/components/pagination';
 import useFetch from '@/hooks/use-fetch';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -8,17 +9,21 @@ const Home = () => {
 
     const [searchTxt, setSearchTxt] = useState("");
     const [cleanedData, setCleanedData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
     const { fetchBooks, data, error, loading } = useFetch();
 
     const { totalItems, books } = data;
+    const ItemsPerPage = 20;
+    const offset = (currentPage - 1) * ItemsPerPage;
 
     useEffect(() => {
         let timer;
         if (searchTxt) {
-            timer = setTimeout(() => fetchBooks(searchTxt), 200);
+            const cacheKey = searchTxt + "_" + offset;
+            timer = setTimeout(() => fetchBooks(`?q=${searchTxt}&startIndex=${offset}&maxResults=${ItemsPerPage}`, cacheKey), 200);
         }
         return () => clearTimeout(timer);
-    }, [searchTxt]);
+    }, [searchTxt, currentPage]);
 
     useEffect(() => {
         if (data?.books) {
@@ -54,17 +59,16 @@ const Home = () => {
             {
                 error && <div className='text-red-600'>Error fetching data. Please try again later.</div>
             }
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
-
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {
                     cleanedData.length > 0 && cleanedData.map((book) => (
                         <BookCard data={book} key={book.id} />
                     ))
                 }
             </div>
-
-
-
+            {
+                cleanedData.length > 0 && <PaginationComponent currentPage={currentPage} setCurrentPage={setCurrentPage} itemsPerPage={ItemsPerPage} totalItems={totalItems} />
+            }
         </div>
     )
 }

@@ -28,33 +28,38 @@ const useFetch = () => {
         return null;
     };
 
-    const fetchBooks = async (query, offset = 20, limit = 0) => {
-        console.log({ query })
+    const fetchBooks = async (query, cacheKey) => {
         setLoading(true);
         setData({});
 
-        const cachedData = getCache(query);
+        const cachedData = getCache(cacheKey);
 
         if (cachedData) {
+            console.log("Getting Cached Data" , cachedData);
             setData(cachedData);
             setLoading(false);
             return;
         }
-
         try {
 
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${limit}&maxResults=${offset}`);
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes${query}`);
 
             if (!response.ok) {
                 throw new Error(`API Error: ${response.statusText}`);
             }
 
             const data = await response.json();
-            const { totalItems, items: books } = data;
-
+            const { totalItems} = data;
+            let books;
+            
+            if(data?.items){
+                books = data.items;
+            }else{
+                books = data
+            }
+            
             setData({ totalItems, books })
-
-            setCache(query, books);
+            setCache(cacheKey, {books});
 
 
         } catch (error) {
@@ -64,6 +69,7 @@ const useFetch = () => {
         }
     };
 
+    
     return { fetchBooks, data, error, loading };
 };
 
