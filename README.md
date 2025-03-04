@@ -27,7 +27,7 @@ Welcome to **Book Finder**, a web application that helps you search for books ef
 ## 🛠️ Tech Stack
 
 - **Frontend:** React, Tailwind CSS
-- **API:** Google Books API (or any other book database)
+- **API:** Google Books API 
 - **State Management:** React Hooks
 - **Performance Enhancements:** LocalStorage Caching, Lazy Loading
 
@@ -39,7 +39,7 @@ Follow these steps to run the project locally:
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-username/book-finder.git
+git clone https://github.com/tarunsrinivas4302/book-finder.git
 cd book-finder
 ```
 
@@ -53,7 +53,6 @@ yarn install
 ### 3️⃣ Set Up Environment Variables
 Create a **.env** file and add your API key:
 ```env
-VITE_API_KEY=your_api_key_here
 VITE_CACHE_KEY=book_finder_cache
 ```
 
@@ -68,34 +67,4 @@ The app should now be running on **http://localhost:5173** 🚀
 
 ---
 
-## 🎥 Demo
-[![Book Finder Demo](https://via.placeholder.com/800x400)](https://your-demo-link.com)
-> _Click the image to watch the demo_
-
----
-
-## 📌 Future Enhancements
-- Implement **dark mode** for better accessibility.
-- Add a **favorite books** feature to save preferred books.
-- Enhance **UI/UX** with better animations.
-
----
-
-## 🤝 Contributing
-Contributions are welcome! To contribute:
-1. Fork the repo.
-2. Create a new branch: `git checkout -b feature-xyz`
-3. Commit your changes: `git commit -m "Added feature XYZ"`
-4. Push to your branch: `git push origin feature-xyz`
-5. Open a **Pull Request** 🎉
-
----
-
-## 📜 License
-This project is licensed under the **MIT License**.
-
----
-
-## 🌟 Show Your Support
-If you like this project, give it a ⭐ on [GitHub](https://github.com/your-username/book-finder)! Happy coding! 🚀
 
