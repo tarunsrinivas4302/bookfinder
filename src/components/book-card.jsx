@@ -11,7 +11,7 @@ const BookCard = ({ data }) => {
                     <LazyLoadImage
                         src={data.image}
                         alt={data.subtitle}
-                         effect="black-and-white"
+                        effect="black-and-white"
                         className="w-60 h-60 object-cover transition-transform duration-300 "
                     />
                 </div>
@@ -21,16 +21,16 @@ const BookCard = ({ data }) => {
             </CardHeader>
 
             <CardContent className="px-4">
-                <p className="h-14 text-gray-700 text-sm text-ellipsis overflow-hidden">
+                <p className="h-14 text-gray-700 dark:text-white text-sm text-ellipsis overflow-hidden">
                     {data.description}
                 </p>
             </CardContent>
 
             <CardFooter className="flex justify-center px-4 mt-2">
                 <Link to={`book/${data.id}`}>
-                <Button variant="default" className="px-6 py-2 text-sm font-semibold cursor-pointer">
-                    View Details
-                </Button>
+                    <Button variant="default" className="px-6 py-2 text-sm font-semibold cursor-pointer">
+                        View Details
+                    </Button>
                 </Link>
             </CardFooter>
         </Card>
