@@ -13,19 +13,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/"
-            element={
-              <Suspense fallback={<BarLoader color='oklch(0.777 0.152 181.912)' width="100%" height="4px" />}>
-                <Home />
-              </Suspense>
-            } />
-
+           element={
+             <Suspense fallback={<BarLoader color='oklch(0.777 0.152 181.912)' width="100%" height="4px" />}>
+              <Home />
+            </Suspense>
+          } />
+          
           <Route path="book/:id" element={
             <Suspense fallback={<BarLoader color='oklch(0.777 0.152 181.912)' width="100%" height="4px" />}>
               <BookDetails />
             </Suspense>
           } />
-
-
+        
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
