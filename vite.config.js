@@ -12,9 +12,10 @@ const __dirname = path.dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "./",
+  base: "/",  // Ensure it's set correctly
   build: {
-    outDir: "dist"
+    outDir: "dist",
+    assetsDir: "assets"
   },
   resolve: {
     alias: {
