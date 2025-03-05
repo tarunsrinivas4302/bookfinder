@@ -25,7 +25,7 @@ const Home = () => {
         }
         if (searchTxt) {
             const cacheKey = searchTxt + "_" + offset;
-            timer = setTimeout(() => fetchBooks(`?q=${searchTxt}&startIndex=${offset}&maxResults=${ItemsPerPage}`, cacheKey), 200);
+            timer = setTimeout(() => fetchBooks(`?q=${searchTxt}&startIndex=${offset}&maxResults=${ItemsPerPage}`, cacheKey), 400);
         }
         return () => clearTimeout(timer);
     }, [searchTxt, currentPage]);
