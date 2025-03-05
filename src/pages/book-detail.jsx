@@ -126,7 +126,7 @@ const BookDetails = () => {
                         </div>
 
                         <div className="my-3 text-sm text-gray-600 dark:text-white font-mono">
-                            {singleBook.desscription || "No Description Avaliable For this Book"}   
+                            {singleBook.description || "No Description Avaliable For this Book"}   
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
