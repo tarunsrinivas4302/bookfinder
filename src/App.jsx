@@ -19,7 +19,7 @@ function App() {
             </Suspense>
           } />
           
-          <Route path="book/:id" element={
+          <Route path="/book" element={
             <Suspense fallback={<BarLoader color='oklch(0.777 0.152 181.912)' width="100%" height="4px" />}>
               <BookDetails />
             </Suspense>

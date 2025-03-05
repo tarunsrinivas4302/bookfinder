@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
 import React, { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import StarRatingComponent from "@/components/star-rating-component";
@@ -12,10 +12,15 @@ import { ModeToggle } from "@/components/model-toggle";
 import { BookOpen } from "lucide-react";
 
 const BookDetails = () => {
-    const { id } = useParams();
+  
     const { fetchBooks, data, loading, error } = useFetch();
     const [singleBook, setSingleBook] = useState({});
     const [randomRating, setRandomRating] = useState(Math.floor(Math.random() * 3) + 3)
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get("id"); 
+
 
     useEffect(() => {
         fetchBooks(`/${id}`, id);

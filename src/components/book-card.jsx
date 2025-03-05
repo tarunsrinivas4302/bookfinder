@@ -27,7 +27,7 @@ const BookCard = ({ data }) => {
             </CardContent>
 
             <CardFooter className="flex justify-center px-4 mt-2">
-                <Link to={`book/${data.id}`}>
+                <Link to={`/book/?id=${data.id}`}>
                     <Button variant="default" className="px-6 py-2 text-sm font-semibold cursor-pointer">
                         View Details
                     </Button>
