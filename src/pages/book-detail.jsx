@@ -15,7 +15,7 @@ const BookDetails = () => {
     const { id } = useParams();
     const { fetchBooks, data, loading, error } = useFetch();
     const [singleBook, setSingleBook] = useState({});
-    const randomRating = Math.floor(Math.random() * 3) + 3;
+    const [randomRating, setRandomRating] = useState(Math.floor(Math.random() * 3) + 3)
 
     useEffect(() => {
         fetchBooks(`/${id}`, id);
@@ -26,6 +26,11 @@ const BookDetails = () => {
             setSingleBook(data.books?.volumeInfo);
         }
     }, [data]);
+
+
+    const updateRating = (rating) => {
+        setRandomRating(rating);
+    }
 
     if (loading)
         return (
@@ -40,12 +45,11 @@ const BookDetails = () => {
 
     if (error) return <div>Error ...</div>;
 
-    console.log({ singleBook });
 
     return (
         <div className="container mx-auto  relative">
             <h1 className="text-3xl mb-3 font-mono text-center text-bold mt-2 ">
-               📚 Book Finder
+                📚 Book Finder
             </h1>
             <div className="absolute top-0 right-3">
                 <ModeToggle />
@@ -68,15 +72,15 @@ const BookDetails = () => {
                             {singleBook.subtitle || "No Subtitle"}
                         </p>
 
-                        <StarRatingComponent length="5" />
+                        <StarRatingComponent length="5" callback={updateRating} />
                         <a
-                            href={singleBook.previewLink}
+                            href={`https://www.google.com/search?tbo=p&tbm=bks&q=title:"${singleBook.title}"`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             <Button
                                 variant="destructive"
-                                className="mt-3 flex mx-auto w-full sm:w-fit"
+                                className="mt-3 flex mx-auto w-full sm:w-fit cursor-pointer"
                             >
                                 Preview Book
                             </Button>
@@ -93,8 +97,8 @@ const BookDetails = () => {
                                 ? singleBook.authors.map((author) => (
                                     <a
                                         key={author}
-                                        className="text-blue-400     text-lg underline mx-1 font-mono"
-                                        href={`https://www.google.com/search?q=${author}`}
+                                        className="text-blue-400 cursor-pointer text-lg underline mx-1 font-mono"
+                                        href={`https://en.wikipedia.org/wiki/Special:Search?search=${author}`}
                                         rel="noopener noreferrer"
                                         target="_blank"
                                         title={`Search for ${author} on Google`}
@@ -117,7 +121,7 @@ const BookDetails = () => {
                         </div>
 
                         <div className="my-3 text-sm text-gray-600 dark:text-white font-mono">
-                            <p>{singleBook.description || "No description available."}</p>
+                            {singleBook.desscription || "No Description Avaliable For this Book"}   
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">

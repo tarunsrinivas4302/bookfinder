@@ -58,7 +58,8 @@ yarn install
 
 ### 3️⃣ Set Up Environment Variables
 
-Create a **.env** file and add your API key:
+**Note this Process is Optional** 
+Create a **.env** file and add your CACHE KEY:
 
 ```env
 VITE_CACHE_KEY=book_finder_cache

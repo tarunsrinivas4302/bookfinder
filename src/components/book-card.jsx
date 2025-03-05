@@ -11,7 +11,7 @@ const BookCard = ({ data }) => {
                     <LazyLoadImage
                         src={data.image}
                         alt={data.subtitle}
-                        effect="black-and-white"
+                        effect="blur"
                         className="w-60 h-60 object-cover transition-transform duration-300 "
                     />
                 </div>

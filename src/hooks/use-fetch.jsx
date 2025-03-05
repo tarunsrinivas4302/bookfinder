@@ -1,41 +1,18 @@
 import { useState } from 'react';
+import useCache from './use-cache';
 
 const useFetch = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const CACHE_KEY = import.meta.env.VITE_CACHE_KEY || 'app_cache';
-
-    const cache = JSON.parse(localStorage.getItem(CACHE_KEY)) || {};
-
-    const setCache = (query, value, ttl = 86400 * 1000) => {
-        cache[query] = {
-            data: value,
-            timestamp: Date.now() + ttl
-        };
-        localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
-    };
-
-    const getCache = (query) => {
-        if (cache[query]) {
-            if (Date.now() < cache[query].timestamp) {
-                return cache[query].data;
-            } else {
-                delete cache[query];
-                localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
-            }
-        }
-        return null;
-    };
+    const { setCache, getCache } = useCache();
 
     const fetchBooks = async (query, cacheKey) => {
         setLoading(true);
         setData({});
-
         const cachedData = getCache(cacheKey);
-
         if (cachedData) {
-            console.log("Getting Cached Data" , cachedData);
+            console.log("Getting Cached Data", cachedData);
             setData(cachedData);
             setLoading(false);
             return;
@@ -49,17 +26,17 @@ const useFetch = () => {
             }
 
             const data = await response.json();
-            const { totalItems} = data;
+            const { totalItems } = data;
             let books;
-            
-            if(data?.items){
+
+            if (data?.items) {
                 books = data.items;
-            }else{
+            } else {
                 books = data
             }
-            
+
             setData({ totalItems, books })
-            setCache(cacheKey, {books});
+            setCache(cacheKey, { books });
 
 
         } catch (error) {
@@ -69,7 +46,7 @@ const useFetch = () => {
         }
     };
 
-    
+
     return { fetchBooks, data, error, loading };
 };
 
